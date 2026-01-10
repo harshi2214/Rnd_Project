@@ -6,53 +6,70 @@ function Home() {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const [logged, setLogged] = useState(false);
+  const [error, setError] = useState("");
 
   function handleLogin() {
     if (user === "admin" && pass === "1234") {
       setLogged(true);
+      setError("");
     } else {
-      alert("Invalid login");
+      setError("Invalid Username or Password");
     }
   }
 
   if (logged) {
-    return <StudentDashboard />;
+    return <StudentDashboard onLogout={() => setLogged(false)} />;
   }
 
   return (
-    <div className="home-container">
+    <div className="login-bg">
 
-      <div className="home-left">
-        <img src="/mru-logo.png" className="uni-logo" />
-        <h2>Malla Reddy University</h2>
-        <p className="tagline">
+      <div className="login-overlay">
+
+        {/* LOGO */}
+        <img
+          src="/mru-logo.png"
+          alt="MRU Logo"
+          className="login-logo"
+        />
+
+        {/* UNIVERSITY NAME */}
+        <h1>MALLA REDDY UNIVERSITY</h1>
+
+        {/* SUB TITLE */}
+        <p className="portal-text">
           Research & Development Portal for Ph.D Scholars
         </p>
-      </div>
 
-      <div className="home-right">
-        <div className="login-card">
+        {/* USERNAME */}
+        <input
+          type="text"
+          placeholder="Username"
+          className="login-input"
+          onChange={(e) => setUser(e.target.value)}
+        />
 
-          <h3>Welcome</h3>
+        {/* PASSWORD */}
+        <input
+          type="password"
+          placeholder="Password"
+          className="login-input"
+          onChange={(e) => setPass(e.target.value)}
+        />
 
-          <input
-            className="input-box"
-            placeholder="Username"
-            onChange={(e) => setUser(e.target.value)}
-          />
+        {/* ERROR MESSAGE */}
+        {error && (
+          <p className="error-text">{error}</p>
+        )}
 
-          <input
-            className="input-box"
-            type="password"
-            placeholder="Password"
-            onChange={(e) => setPass(e.target.value)}
-          />
+        {/* LOGIN BUTTON */}
+        <button
+          className="login-btn2"
+          onClick={handleLogin}
+        >
+          LOGIN
+        </button>
 
-          <button className="login-btn" onClick={handleLogin}>
-            Login
-          </button>
-
-        </div>
       </div>
     </div>
   );

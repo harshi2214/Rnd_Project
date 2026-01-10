@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function StudentDashboard() {
+function StudentDashboard({ onLogout }) {
   const [activeTab, setActiveTab] = useState("personal");
 
   const student = {
@@ -23,7 +23,23 @@ function StudentDashboard() {
 
   return (
     <div style={{ padding: "30px" }}>
-      <h2>Student Dashboard</h2>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+  <h2>Student Dashboard</h2>
+
+  <button 
+    onClick={onLogout}
+    style={{
+      background: "#0d465ce3",
+      color: "white",
+      border: "none",
+      padding: "8px 16px",
+      borderRadius: "5px",
+      cursor: "pointer"
+    }}
+  >
+    Logout
+  </button>
+</div>
 
       {/* Tabs */}
       <div className="tab-bar">
