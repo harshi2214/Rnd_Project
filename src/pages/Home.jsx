@@ -1,24 +1,18 @@
 import { useState } from "react";
-import StudentDashboard from "./StudentDashboard";
 
-function Home() {
+function Home({ onLogin }) {
 
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
-  const [logged, setLogged] = useState(false);
   const [error, setError] = useState("");
 
   function handleLogin() {
     if (user === "admin" && pass === "1234") {
-      setLogged(true);
       setError("");
+      onLogin();   // control goes to App.jsx
     } else {
       setError("Invalid Username or Password");
     }
-  }
-
-  if (logged) {
-    return <StudentDashboard onLogout={() => setLogged(false)} />;
   }
 
   return (
@@ -46,6 +40,7 @@ function Home() {
           type="text"
           placeholder="Username"
           className="login-input"
+          value={user}
           onChange={(e) => setUser(e.target.value)}
         />
 
@@ -54,6 +49,7 @@ function Home() {
           type="password"
           placeholder="Password"
           className="login-input"
+          value={pass}
           onChange={(e) => setPass(e.target.value)}
         />
 
