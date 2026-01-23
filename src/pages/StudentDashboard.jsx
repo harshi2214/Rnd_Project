@@ -112,15 +112,43 @@ function StudentDashboard({ onLogout }) {
 {/* ---------------- RESEARCH ---------------- */}
 {activeTab === "research" && (
   <>
-    <div className="info-card">
-      <h3 className="section-title">Supervisor Details</h3>
-      <div className="info-grid">
-        <div><label>Name</label><input value="Dr. Thayyaba Khatoon" readOnly /></div>
-        <div><label>Department</label><input value="CSE, MRU" readOnly /></div>
-        <div><label>Assigned</label><input value="01-02-2021" readOnly /></div>
-        <div><label>Leave</label><input value="-" readOnly /></div>
-      </div>
+    <div className="info-card supervisor-card">
+
+  {/* Header row (title + button) */}
+  <div className="supervisor-header">
+    <h3 className="supervisor-title">Supervisor Details</h3>
+
+    <button className="add-supervisor-btn">
+      + Add Supervisor Slot
+    </button>
+  </div>
+
+  {/* Full-width blue line */}
+  <div className="section-divider"></div>
+
+  <div className="info-grid">
+    <div>
+      <label>Name</label>
+      <input value="Dr. Thayyaba Khatoon" readOnly />
     </div>
+
+    <div>
+      <label>Department</label>
+      <input value="CSE, MRU" readOnly />
+    </div>
+
+    <div>
+      <label>Assigned</label>
+      <input value="01-02-2021" readOnly />
+    </div>
+
+    <div>
+      <label>Leave</label>
+      <input value="-" readOnly />
+    </div>
+  </div>
+
+</div>
 
     <div className="info-card" style={{ marginTop: "20px" }}>
       <h3 className="section-title">Research & Fellowship</h3>
@@ -188,7 +216,10 @@ function StudentDashboard({ onLogout }) {
     </div>
   </div>
 )}
-
+{/* Add New Student Floating Button */}
+<button className="add-student-btn">
+  + Add New Student
+</button>
         </div>
       </div>
     </>
