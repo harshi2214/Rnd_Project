@@ -125,7 +125,7 @@ body {
 }
 /* Tabs EDIT FROM HERE*/
 .tab-bar {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .tab-bar button {
@@ -136,7 +136,8 @@ body {
   margin-right: 10px;
   cursor: pointer;
   border-radius: 4px;
-  width: 240px;
+  width: 226px;
+  margin-top: 2px;
 }
 
 .tab-bar button:hover {
@@ -345,6 +346,7 @@ body {
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 12px;
+  margin-bottom: 8px;
 }
 
 /* Default outlined buttons */
@@ -352,7 +354,7 @@ body {
   background: white;
   color: #0d465ce3;
   border: 1.5px solid #0d465ce3;
-  padding: 6px 14px;
+  padding: 6px 12px;
   border-radius: 20px;
   cursor: pointer;
   font-size: 13px;
@@ -398,7 +400,7 @@ body {
 }
 
 .print {
-  background: #546e7a !important;
+  background: #c76d31d2 !important;
   color: white !important;
   border: none !important;
 }
@@ -469,4 +471,57 @@ body {
 
 .add-supervisor-btn:hover {
   background: #ffa000;
+}
+/* Dashboard Title */
+.dashboard-title {
+  margin-top: 2px;       /* was large, now minimal */
+  margin-bottom: 10px;   /* tight spacing */
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+}
+.search-section {
+  margin-bottom: 8px;
+}
+
+.search-row {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 6px;
+  align-items: center;
+}
+
+/* Inputs */
+.search-row input,
+.search-row select {
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  min-width: 308px;
+}
+
+/* Make second row fields wider */
+.search-row select {
+  min-width: 500px;
+}
+
+.search-row input:nth-child(2) {
+  flex: 1; /* stretches search field */
+}
+
+/* Buttons */
+.search-row button {
+  background: #1f5d73;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Align Search Field button with Fees Due */
+.align-btn {
+  margin-left: auto;
+  margin-right: auto;
 }

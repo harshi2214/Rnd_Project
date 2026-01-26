@@ -9,34 +9,37 @@ function StudentDashboard({ onLogout }) {
       <div style={{ padding: "25px" }}>
 
         {/* DASHBOARD HEADING */}
-        <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
-          Student Dashboard
-        </h2>
+        <h2 className="dashboard-title">Student Dashboard</h2>
+
 
         {/* SEARCH ROW 1 */}
-        <div className="dash-row">
-          <input placeholder="Search by Name / Hall Ticket / Mobile" />
-          <button>Search</button>
+        <div className="search-section">
 
-          <input placeholder="Search by Supervisor Name" />
-          <button>Search Sup</button>
+  {/* ROW 1 */}
+  <div className="search-row">
+    <input placeholder="Search by Name / Hall Ticket / Mobile" />
+    <button>Search</button>
 
-          <input placeholder="Fees Due Year (1-4 or blank-any)" />
-          <button>Fees Due</button>
-        </div>
+    <input placeholder="Search by Supervisor Name" />
+    <button>Search Sup</button>
 
-        {/* SEARCH ROW 2 */}
-        <div className="dash-row">
-          <select>
-            <option>Select field</option>
-            <option>Name</option>
-            <option>Roll No</option>
-            <option>Department</option>
-          </select>
+    <input placeholder="Fees Due Year (1-4 or blank-any)" />
+    <button>Fees Due</button>
+  </div>
 
-          <input placeholder="Search value for selected field / all fields" />
-          <button>Search Field</button>
-        </div>
+  {/* ROW 2 */}
+  <div className="search-row">
+    <select>
+      <option>Select field</option>
+    </select>
+
+    <input placeholder="Search value for selected field / all fields" />
+
+    <button className="align-btn">Search Field</button>
+  </div>
+
+</div>
+
 
         {/* ACTION BUTTONS */}
         <div className="action-bar">
