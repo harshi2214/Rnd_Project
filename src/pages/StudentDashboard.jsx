@@ -71,6 +71,7 @@ function StudentDashboard({ onLogout }) {
 
         {/* TAB CONTENT */}
         <div className="tab-content">
+          
 
 {/* ---------------- PERSONAL ---------------- */}
 {activeTab === "personal" && (
@@ -81,18 +82,88 @@ function StudentDashboard({ onLogout }) {
     </p>
 
     <div className="info-grid">
-      <div><label>Name</label><input value="E KRISHNAVENI REDDY" readOnly /></div>
-      <div><label>Nationality</label><input value="INDIAN" readOnly /></div>
-      <div><label>Application No</label><input value="2001883" readOnly /></div>
-      <div><label>Roll No</label><input value="21132CS010002" readOnly /></div>
-      <div><label>Mobile</label><input value="9701798883" readOnly /></div>
-      <div><label>Email</label><input value="ekrishnavenireddy@gmail.com" readOnly /></div>
-      <div><label>Aadhar</label><input value="8550 8107 2518" readOnly /></div>
-      <div><label>Passport</label><input value="-" readOnly /></div>
-      <div><label>UG</label><input value="B.Tech (CSE)" readOnly /></div>
-      <div><label>PG</label><input value="M.Tech (CSE)" readOnly /></div>
-      <div><label>Department</label><input value="CSE" readOnly /></div>
-    </div>
+
+  {/* Row 1 */}
+  <div>
+    <label>S. No</label>
+    <input value="1" readOnly />
+  </div>
+
+  <div>
+    <label>Application No</label>
+    <input value="2001883" readOnly />
+  </div>
+
+  <div>
+    <label>Admission Date</label>
+    <input value="02-01-2021" readOnly />
+  </div>
+
+  {/* Row 2 */}
+  <div>
+    <label>Name</label>
+    <input value="E KRISHNAVENI REDDY" readOnly />
+  </div>
+
+  <div>
+    <label>Nationality</label>
+    <input value="INDIAN" readOnly />
+  </div>
+
+  <div>
+    <label>School / Branch (FT / PT)</label>
+    <input value="Part Time (PT)" readOnly />
+  </div>
+
+  {/* Row 3 */}
+  <div>
+    <label>Roll No</label>
+    <input value="21132CS010002" readOnly />
+  </div>
+
+  <div>
+    <label>Mobile</label>
+    <input value="9701798883" readOnly />
+  </div>
+
+  <div>
+    <label>Student Official Mail ID</label>
+    <input value="phd21cs@mru.edu.in" readOnly />
+  </div>
+
+  {/* Row 4 */}
+  <div>
+    <label>Personal Email ID</label>
+    <input value="ekrishnavenireddy@gmail.com" readOnly />
+  </div>
+
+  <div>
+    <label>Aadhar</label>
+    <input value="8550 8107 2518" readOnly />
+  </div>
+
+  <div>
+    <label>Passport</label>
+    <input value="-" readOnly />
+  </div>
+
+  {/* Row 5 */}
+  <div>
+    <label>UG</label>
+    <input value="B.Tech (CSE)" readOnly />
+  </div>
+
+  <div>
+    <label>PG</label>
+    <input value="M.Tech (CSE)" readOnly />
+  </div>
+
+  <div>
+    <label>Department</label>
+    <input value="Computer Science & Engineering" readOnly />
+  </div>
+
+</div>
   </div>
 )}
 
@@ -115,43 +186,112 @@ function StudentDashboard({ onLogout }) {
 {/* ---------------- RESEARCH ---------------- */}
 {activeTab === "research" && (
   <>
+    {/* ================= SUPERVISOR DETAILS ================= */}
     <div className="info-card supervisor-card">
 
-  {/* Header row (title + button) */}
-  <div className="supervisor-header">
-    <h3 className="supervisor-title">Supervisor Details</h3>
+      <div className="supervisor-header">
+        <h3 className="supervisor-title">Supervisor Details</h3>
 
-    <button className="add-supervisor-btn">
-      + Add Supervisor Slot
-    </button>
-  </div>
+        <button className="add-supervisor-btn">
+          + Add Supervisor Slot
+        </button>
+      </div>
 
-  {/* Full-width blue line */}
-  <div className="section-divider"></div>
+      <div className="section-divider"></div>
 
-  <div className="info-grid">
-    <div>
-      <label>Name</label>
-      <input value="Dr. Thayyaba Khatoon" readOnly />
+      <div className="info-grid">
+
+        <div>
+          <label>Supervisor Name</label>
+          <input value="Dr. Thayyaba Khatoon" readOnly />
+        </div>
+
+        <div>
+          <label>Department / Organization</label>
+          <input value="CSE, MRU" readOnly />
+        </div>
+
+        <div>
+          <label>Official Mail ID</label>
+          <input value="thayyaba.khatoon@mru.edu.in" readOnly />
+        </div>
+
+        <div>
+          <label>Personal Mail ID</label>
+          <input value="thayyabakhatoon@gmail.com" readOnly />
+        </div>
+
+        <div>
+          <label>Mobile Number</label>
+          <input value="98XXXXXXXX" readOnly />
+        </div>
+
+        <div>
+          <label>Assigned Date</label>
+          <input value="01-02-2021" readOnly />
+        </div>
+
+        <div>
+          <label>Leave Date</label>
+          <input value="-" readOnly />
+        </div>
+
+      </div>
     </div>
 
-    <div>
-      <label>Department</label>
-      <input value="CSE, MRU" readOnly />
-    </div>
 
-    <div>
-      <label>Assigned</label>
-      <input value="01-02-2021" readOnly />
-    </div>
+    {/* ================= CO-SUPERVISOR DETAILS ================= */}
+    <div className="info-card supervisor-card" style={{ marginTop: "30px" }}>
 
-    <div>
-      <label>Leave</label>
-      <input value="-" readOnly />
-    </div>
-  </div>
+      <div className="supervisor-header">
+        <h3 className="supervisor-title">Co-Supervisor Details</h3>
 
-</div>
+        <button className="add-supervisor-btn">
+          + Add Co-Supervisor Slot
+        </button>
+      </div>
+
+      <div className="section-divider"></div>
+
+      <div className="info-grid">
+
+        <div>
+          <label>Co-Supervisor Name</label>
+          <input value="Dr. XYZ" readOnly />
+        </div>
+
+        <div>
+          <label>Department / Organization</label>
+          <input value="CSE, MRU" readOnly />
+        </div>
+
+        <div>
+          <label>Official Mail ID</label>
+          <input value="cosupervisor@mru.edu.in" readOnly />
+        </div>
+
+        <div>
+          <label>Personal Mail ID</label>
+          <input value="cosupervisor@gmail.com" readOnly />
+        </div>
+
+        <div>
+          <label>Mobile Number</label>
+          <input value="97XXXXXXXX" readOnly />
+        </div>
+
+        <div>
+          <label>Assigned Date</label>
+          <input value="15-03-2021" readOnly />
+        </div>
+
+        <div>
+          <label>Leave Date</label>
+          <input value="-" readOnly />
+        </div>
+
+      </div>
+    </div>
 
     <div className="info-card" style={{ marginTop: "20px" }}>
       <h3 className="section-title">Research & Fellowship</h3>
