@@ -315,28 +315,118 @@ function StudentDashboard({ onLogout }) {
   <div className="info-card">
     <h3 className="section-title">Fees, Course Work & RRM</h3>
     <h4 className="sub-title">Fees</h4>
-    <div className="info-grid">
-      <div><label>Year I</label><input value="Paid" readOnly /></div>
-      <div><label>Year II</label><input value="Paid" readOnly /></div>
-      <div><label>Year III</label><input value="Pending" readOnly /></div>
-      <div><label>Year IV</label><input value="Pending" readOnly /></div>
-    </div>
 
-    <h4 className="sub-title" style={{ marginTop: "20px" }}>Course Work</h4>
-    <div className="info-grid">
-      <div><label>CW I</label><input value="Completed" readOnly /></div>
-      <div><label>CW II</label><input value="Completed" readOnly /></div>
-      <div><label>CW III</label><input value="Pending" readOnly /></div>
-      <div><label>CW IV</label><input value="Pending" readOnly /></div>
-    </div>
+<div className="info-grid">
 
-    <h4 className="sub-title" style={{ marginTop: "20px" }}>RRM</h4>
-    <div className="info-grid">
-      <div><label>RRM I</label><input value="Clear" readOnly /></div>
-      <div><label>RRM II</label><input value="Clear" readOnly /></div>
-      <div><label>RRM III</label><input value="Not Clear" readOnly /></div>
-      <div><label>RRM IV</label><input value="NA" readOnly /></div>
-    </div>
+  {/* Row 1 */}
+  <div>
+    <label>Fees – Year 1</label>
+    <input value="Paid" readOnly />
+  </div>
+
+  <div>
+    <label>Fees – Year 2</label>
+    <input value="Paid" readOnly />
+  </div>
+
+  <div></div>
+
+  {/* Row 2 */}
+  <div>
+    <label>Fees – Year 3</label>
+    <input value="Pending" readOnly />
+  </div>
+
+  <div>
+    <label>Fees – Year 4</label>
+    <input value="Pending" readOnly />
+  </div>
+
+  <div></div>
+
+</div>
+
+    {/* COURSE WORK SECTION */}
+<h4 className="sub-title" style={{ marginTop: "25px" }}>
+  Course Work
+</h4>
+
+<div className="info-grid">
+
+  {/* Student Course Work 1 */}
+  <div>
+    <label>Student Course Work 1 Status</label>
+    <input value="Completed" readOnly />
+  </div>
+
+  <div>
+    <label>Student Course Work 1 Date</label>
+    <input value="15-06-2022" readOnly />
+  </div>
+
+  <div></div>
+
+  {/* Student Course Work 2 */}
+  <div>
+    <label>Student Course Work 2 Status</label>
+    <input value="Incomplete" readOnly />
+  </div>
+
+  <div>
+    <label>Student Course Work 2 Date</label>
+    <input value="-" readOnly />
+  </div>
+
+  <div></div>
+
+</div>
+    {/* RRM SECTION */}
+<h4 className="sub-title" style={{ marginTop: "25px" }}>
+  RRM
+</h4>
+
+<div className="info-grid">
+
+  {/* RRM 1 */}
+  <div>
+    <label>RRM 1 Status</label>
+    <input value="Clear" readOnly />
+  </div>
+
+  <div>
+    <label>RRM 1 Date</label>
+    <input value="10-08-2022" readOnly />
+  </div>
+
+  <div></div>
+
+  {/* RRM 2 */}
+  <div>
+    <label>RRM 2 Status</label>
+    <input value="Clear" readOnly />
+  </div>
+
+  <div>
+    <label>RRM 2 Date</label>
+    <input value="12-02-2023" readOnly />
+  </div>
+
+  <div></div>
+
+  {/* RRM 3 */}
+  <div>
+    <label>RRM 3 Status</label>
+    <input value="Not Clear" readOnly />
+  </div>
+
+  <div>
+    <label>RRM 3 Date</label>
+    <input value="-" readOnly />
+  </div>
+
+  <div></div>
+
+</div>
   </div>
 )}
 
