@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 function StudentDashboard({ onLogout }) {
   const [activeTab, setActiveTab] = useState("personal");
 
@@ -42,23 +41,18 @@ function StudentDashboard({ onLogout }) {
 
 
         {/* ACTION BUTTONS */}
-        <div className="action-bar">
+        <div className="action-buttons">
+  <button className="btn edit">Edit</button>
+  <button className="btn save">Save</button>
+  <button className="btn delete">Delete</button>
+  <button className="btn add">Add New</button>
 
-          <button className="edit">Edit</button>
-          <button className="save">Save</button>
-          <button className="delete">Delete</button>
-          <button className="add">Add New</button>
+  <button className="btn outline">Export CSV</button>
+  <button className="btn outline">Import CSV</button>
+  <button className="btn outline docx">Export DOCX</button>
 
-          <button>Export CSV</button>
-          <button>Import CSV</button>
-          <button>CSV Template</button>
-          <button>Export JSON</button>
-          <button>Import JSON</button>
-
-          <button className="approve">Approve Pending</button>
-          <button className="pending">Pending Requests</button>
-          <button className="print">Print / PDF</button>
-        </div>
+  <button className="btn print">Print / PDF</button>
+</div>
 
         {/* TABS */}
         <div className="tab-bar">
@@ -66,7 +60,7 @@ function StudentDashboard({ onLogout }) {
           <button onClick={() => setActiveTab("academic")}>Academic Details</button>
           <button onClick={() => setActiveTab("research")}>Research & Supervisors</button>
           <button onClick={() => setActiveTab("fees")}>Fees, Course Work & RRM</button>
-          <button onClick={() => setActiveTab("publications")}>Publications & Remarks</button>
+          <button onClick={() => setActiveTab("publications")}>Publications & Thesis</button>
         </div>
 
         {/* TAB CONTENT */}
@@ -433,21 +427,92 @@ function StudentDashboard({ onLogout }) {
 {/* ---------------- PUBLICATIONS ---------------- */}
 {activeTab === "publications" && (
   <div className="info-card">
-    <h3 className="section-title">Publications & Remarks</h3>
+  <h3 className="section-title">Publications</h3>
 
-    <h4 className="sub-title">Publications</h4>
-    <div className="info-grid">
-      <div><label>National</label><input value="2" readOnly /></div>
-      <div><label>International</label><input value="1" readOnly /></div>
-      <div><label>Total</label><input value="3" readOnly /></div>
+  <table className="data-table">
+    <thead>
+      <tr>
+        <th>S. No</th>
+        <th>Title of Publication</th>
+        <th>Journal Name</th>
+        <th>ISSN No</th>
+        <th>Year Published</th>
+        <th>Index</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Machine Learning Based Analysis</td>
+        <td>International Journal of AI</td>
+        <td>1234-5678</td>
+        <td>2023</td>
+        <td>Scopus</td>
+      </tr>
+
+      <tr>
+        <td>2</td>
+        <td>Deep Learning for Healthcare</td>
+        <td>IEEE Access</td>
+        <td>8765-4321</td>
+        <td>2024</td>
+        <td>SCI</td>
+      </tr>
+    </tbody>
+  </table>
+
+    <div className="info-card" style={{ marginTop: "25px" }}>
+  <h3 className="section-title">Thesis & Viva Details</h3>
+
+  <div className="info-grid">
+
+    <div>
+      <label>Colloquium Date</label>
+      <input value="15-03-2024" readOnly />
     </div>
 
-    <h4 className="sub-title" style={{ marginTop: "20px" }}>Remarks</h4>
-    <div className="info-grid">
-      <div><label>General</label><input value="Good" readOnly /></div>
-      <div><label>Supervisor</label><input value="Excellent" readOnly /></div>
+    <div>
+      <label>Colloquium Result</label>
+      <input value="Passed" readOnly />
     </div>
+
+    <div style={{ gridColumn: "1 / -1" }}>
+      <label>Proposed Thesis Title</label>
+      <input
+        value="A Study on Machine Learning Models for Predictive Analytics"
+        readOnly
+      />
+    </div>
+
+    <div>
+      <label>Thesis Submission Date</label>
+      <input value="20-01-2025" readOnly />
+    </div>
+
+    <div>
+      <label>Viva-Voce Examination Date</label>
+      <input value="05-02-2025" readOnly />
+    </div>
+
+    <div className="viva-radio-group">
+  <label className="radio-label">Viva-Voce Completed</label>
+
+  <div className="radio-options">
+    <label className="radio-item">
+      <input type="radio" name="vivaCompleted" checked readOnly />
+      <span>Yes</span>
+    </label>
+
+    <label className="radio-item">
+      <input type="radio" name="vivaCompleted" readOnly />
+      <span>No</span>
+    </label>
   </div>
+</div>
+  </div>
+</div>
+</div>
 )}
 {/* Add New Student Floating Button */}
 <button className="add-student-btn">

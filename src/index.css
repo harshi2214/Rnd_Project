@@ -525,3 +525,117 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+.table-wrapper {
+  overflow-x: auto;
+}
+/*table for ppublications*/
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.data-table th {
+  background-color: #0d465ce3;
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+
+.data-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.data-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.data-table tr:hover {
+  background-color: #eef6fa;
+}
+/* Viva-Voce Radio Group */
+.viva-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.radio-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.radio-options {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* space between Yes & No */
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+
+.radio-item input[type="radio"] {
+  accent-color: #0d465c; /* matches your theme */
+  cursor: pointer;
+}
+/* Action Buttons Row */
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+/* Base Button */
+.btn {
+  padding: 7px 14px;
+  border-radius: 18px;
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+  font-weight: 500;
+}
+
+/* Filled Buttons */
+.btn.edit { background: #f4b400; color: #fff; }
+.btn.save { background: #81c784; color: #fff; }
+.btn.delete { background: #e53935; color: #fff; }
+.btn.add { background: #455a64; color: #fff; }
+
+/* Outline Buttons */
+.btn.outline {
+  background: #fff;
+  border: 1.5px solid #1f5a6b;
+  color: #1f5a6b;
+}
+
+.btn.outline:hover {
+  background: #1f5a6b;
+  color: #fff;
+}
+
+/* DOCX Button */
+.btn.docx {
+  border-color: #2e7d32;
+  color: #2e7d32;
+}
+
+.btn.docx:hover {
+  background: #2e7d32;
+  color: #fff;
+}
+
+/* Print Button */
+.btn.print {
+  background: #d98c5f;
+  color: #fff;
+}
