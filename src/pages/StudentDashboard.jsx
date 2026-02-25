@@ -1,12 +1,164 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { Document, Packer, Paragraph, TextRun } from "docx";
+import { saveAs } from "file-saver";
 function StudentDashboard({ onLogout }) {
+  const handlePrintPDF = () => {
+  window.print();
+};
+const renderAllSectionsForPrint = () => (
+  <div className="print-only">
+    {/* PERSONAL */}
+    {activeTab !== null && (
+      <>
+        {/* reuse SAME JSX blocks */}
+        {/* PERSONAL */}
+        {activeTab !== "none" && (
+          <div className="info-card">
+            <h3>Personal Information</h3>
+            {/* copy SAME personal JSX here */}
+          </div>
+        )}
+
+        {/* ACADEMIC */}
+        <div className="info-card">
+          <h3>Academic Information</h3>
+          {/* academic JSX */}
+        </div>
+
+        {/* RESEARCH */}
+        <div className="info-card">
+          <h3>Supervisor Details</h3>
+          {/* supervisor JSX */}
+        </div>
+
+        {/* FEES */}
+        <div className="info-card">
+          <h3>Fees, Course Work & RRM</h3>
+          {/* fees JSX */}
+        </div>
+
+        {/* PUBLICATIONS */}
+        <div className="info-card">
+          <h3>Publications & Thesis</h3>
+          {/* publications + thesis JSX */}
+        </div>
+      </>
+    )}
+    <div ref={printRef}>
+  {renderAllSectionsForPrint()}
+</div>
+  </div>
+);
   const [activeTab, setActiveTab] = useState("personal");
+  const handleExportDocx = async () => {
+  const doc = new Document({
+    sections: [
+      {
+        children: [
+
+          // ===== TITLE =====
+          new Paragraph({
+            children: [
+              new TextRun({
+                text: "MALLA REDDY UNIVERSITY",
+                bold: true,
+                size: 32,
+              }),
+            ],
+          }),
+          new Paragraph("Research & Development Portal – Ph.D Scholar"),
+          new Paragraph(""),
+
+          // ===== PERSONAL DETAILS =====
+          new Paragraph({ text: "PERSONAL DETAILS", bold: true }),
+          new Paragraph("Name: E KRISHNAVENI REDDY"),
+          new Paragraph("Application No: 2001883"),
+          new Paragraph("Admission Date: 02-01-2021"),
+          new Paragraph("Roll No: 21132CS010002"),
+          new Paragraph("Nationality: INDIAN"),
+          new Paragraph("School / Branch: Part Time (PT)"),
+          new Paragraph("Mobile: 9701798883"),
+          new Paragraph("Official Mail: phd21cs@mru.edu.in"),
+          new Paragraph("Personal Mail: ekrishnavenireddy@gmail.com"),
+          new Paragraph("Department: Computer Science & Engineering"),
+          new Paragraph(""),
+
+          // ===== ACADEMIC DETAILS =====
+          new Paragraph({ text: "ACADEMIC DETAILS", bold: true }),
+          new Paragraph("Date of Joining: 02-01-2021"),
+          new Paragraph("Type: Part Time"),
+          new Paragraph("Employment: College"),
+          new Paragraph("Status: Continuing"),
+          new Paragraph(""),
+
+          // ===== SUPERVISOR DETAILS =====
+          new Paragraph({ text: "SUPERVISOR DETAILS", bold: true }),
+          new Paragraph("Supervisor Name: Dr. Thayyaba Khatoon"),
+          new Paragraph("Department: CSE, MRU"),
+          new Paragraph("Official Mail: thayyaba.khatoon@mru.edu.in"),
+          new Paragraph("Personal Mail: thayyabakhatoon@gmail.com"),
+          new Paragraph("Mobile: 98XXXXXXXX"),
+          new Paragraph("Assigned Date: 01-02-2021"),
+          new Paragraph(""),
+
+          // ===== CO-SUPERVISOR DETAILS =====
+          new Paragraph({ text: "CO-SUPERVISOR DETAILS", bold: true }),
+          new Paragraph("Co-Supervisor Name: Dr. XYZ"),
+          new Paragraph("Department: CSE, MRU"),
+          new Paragraph("Official Mail: cosupervisor@mru.edu.in"),
+          new Paragraph("Personal Mail: cosupervisor@gmail.com"),
+          new Paragraph("Mobile: 97XXXXXXXX"),
+          new Paragraph("Assigned Date: 15-03-2021"),
+          new Paragraph(""),
+
+          // ===== FEES =====
+          new Paragraph({ text: "FEES DETAILS", bold: true }),
+          new Paragraph("Year 1: Paid"),
+          new Paragraph("Year 2: Paid"),
+          new Paragraph("Year 3: Pending"),
+          new Paragraph("Year 4: Pending"),
+          new Paragraph(""),
+
+          // ===== COURSE WORK =====
+          new Paragraph({ text: "COURSE WORK", bold: true }),
+          new Paragraph("Student Course Work 1: Completed (15-06-2022)"),
+          new Paragraph("Student Course Work 2: Incomplete"),
+          new Paragraph(""),
+
+          // ===== RRM =====
+          new Paragraph({ text: "RRM DETAILS", bold: true }),
+          new Paragraph("RRM 1: Clear (10-08-2022)"),
+          new Paragraph("RRM 2: Clear (12-02-2023)"),
+          new Paragraph("RRM 3: Not Clear"),
+          new Paragraph(""),
+
+          // ===== PUBLICATIONS =====
+          new Paragraph({ text: "PUBLICATIONS", bold: true }),
+          new Paragraph("1. Machine Learning Based Analysis – Scopus – 2023"),
+          new Paragraph("2. Deep Learning for Healthcare – SCI – 2024"),
+          new Paragraph(""),
+
+          // ===== THESIS & VIVA =====
+          new Paragraph({ text: "THESIS & VIVA DETAILS", bold: true }),
+          new Paragraph("Colloquium Date: 15-03-2024"),
+          new Paragraph("Colloquium Result: Passed"),
+          new Paragraph("Proposed Thesis Title: A Study on Machine Learning Models for Predictive Analytics"),
+          new Paragraph("Thesis Submission Date: 20-01-2025"),
+          new Paragraph("Viva Date: 05-02-2025"),
+          new Paragraph("Viva Completed: Yes"),
+        ],
+      },
+    ],
+  });
+
+  const blob = await Packer.toBlob(doc);
+  saveAs(blob, "PhD_Student_Details.docx");
+};
 
   return (
     <>
 
       <div style={{ padding: "25px" }}>
-
         {/* DASHBOARD HEADING */}
         <h2 className="dashboard-title">Student Dashboard</h2>
 
@@ -49,9 +201,13 @@ function StudentDashboard({ onLogout }) {
 
   <button className="btn outline">Export CSV</button>
   <button className="btn outline">Import CSV</button>
-  <button className="btn outline docx">Export DOCX</button>
+  <button className="btn outline docx" onClick={handleExportDocx}>
+  Export DOCX
+</button>
 
-  <button className="btn print">Print / PDF</button>
+  <button className="btn print" onClick={handlePrintPDF}>
+  Print / PDF
+</button>
 </div>
 
         {/* TABS */}

@@ -633,9 +633,32 @@ body {
   background: #2e7d32;
   color: #fff;
 }
+/* PRINT CLEANUP */
+@media print {
+  /* Hide header, tabs, buttons, search */
+  .dashboard-title,
+  .search-section,
+  .action-buttons,
+  .tab-bar,
+  .add-student-btn,
+  header,
+  footer {
+    display: none !important;
+  }
 
-/* Print Button */
-.btn.print {
-  background: #d98c5f;
-  color: #fff;
+  /* Make content full width */
+  body {
+    background: white;
+  }
+
+  .info-card {
+    box-shadow: none;
+    border: none;
+    page-break-inside: avoid;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    margin-top: 10px;
+  }
 }
