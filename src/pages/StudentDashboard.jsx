@@ -1,55 +1,44 @@
-import { useState, useRef } from "react";
-import { Document, Packer, Paragraph, TextRun } from "docx";
+import { useState } from "react";
+import { 
+Document, 
+Packer, 
+Paragraph, 
+TextRun, 
+Table, 
+TableRow, 
+TableCell, 
+WidthType 
+} from "docx";
 import { saveAs } from "file-saver";
 function StudentDashboard({ onLogout }) {
-  const handlePrintPDF = () => {
-  window.print();
-};
-const renderAllSectionsForPrint = () => (
-  <div className="print-only">
-    {/* PERSONAL */}
-    {activeTab !== null && (
-      <>
-        {/* reuse SAME JSX blocks */}
-        {/* PERSONAL */}
-        {activeTab !== "none" && (
-          <div className="info-card">
-            <h3>Personal Information</h3>
-            {/* copy SAME personal JSX here */}
-          </div>
-        )}
-
-        {/* ACADEMIC */}
-        <div className="info-card">
-          <h3>Academic Information</h3>
-          {/* academic JSX */}
-        </div>
-
-        {/* RESEARCH */}
-        <div className="info-card">
-          <h3>Supervisor Details</h3>
-          {/* supervisor JSX */}
-        </div>
-
-        {/* FEES */}
-        <div className="info-card">
-          <h3>Fees, Course Work & RRM</h3>
-          {/* fees JSX */}
-        </div>
-
-        {/* PUBLICATIONS */}
-        <div className="info-card">
-          <h3>Publications & Thesis</h3>
-          {/* publications + thesis JSX */}
-        </div>
-      </>
-    )}
-    <div ref={printRef}>
-  {renderAllSectionsForPrint()}
-</div>
-  </div>
-);
   const [activeTab, setActiveTab] = useState("personal");
+  const [isPrinting, setIsPrinting] = useState(false);
+
+  const handlePrintPDF = () => {
+    setIsPrinting(true);
+
+    setTimeout(() => {
+      window.print();
+      setIsPrinting(false);
+    }, 200);
+  };
+  const row = (label, value) =>
+  new TableRow({
+    children: [
+      new TableCell({
+        width: { size: 40, type: WidthType.PERCENTAGE },
+        children: [
+          new Paragraph({
+            children: [new TextRun({ text: label, bold: true })],
+          }),
+        ],
+      }),
+      new TableCell({
+        width: { size: 60, type: WidthType.PERCENTAGE },
+        children: [new Paragraph(value)],
+      }),
+    ],
+  });
   const handleExportDocx = async () => {
   const doc = new Document({
     sections: [
@@ -70,82 +59,179 @@ const renderAllSectionsForPrint = () => (
           new Paragraph(""),
 
           // ===== PERSONAL DETAILS =====
-          new Paragraph({ text: "PERSONAL DETAILS", bold: true }),
-          new Paragraph("Name: E KRISHNAVENI REDDY"),
-          new Paragraph("Application No: 2001883"),
-          new Paragraph("Admission Date: 02-01-2021"),
-          new Paragraph("Roll No: 21132CS010002"),
-          new Paragraph("Nationality: INDIAN"),
-          new Paragraph("School / Branch: Part Time (PT)"),
-          new Paragraph("Mobile: 9701798883"),
-          new Paragraph("Official Mail: phd21cs@mru.edu.in"),
-          new Paragraph("Personal Mail: ekrishnavenireddy@gmail.com"),
-          new Paragraph("Department: Computer Science & Engineering"),
-          new Paragraph(""),
+          new Paragraph({
+  children: [new TextRun({ text: "PERSONAL DETAILS", bold: true, size: 26 })],
+  spacing: { after: 200 },
+}),
 
+new Table({
+  width: { size: 100, type: WidthType.PERCENTAGE },
+  rows: [
+    row("Name", "E KRISHNAVENI REDDY"),
+    row("Application No", "2001883"),
+    row("Admission Date", "02-01-2021"),
+    row("Roll No", "21132CS010002"),
+    row("Nationality", "INDIAN"),
+    row("Branch", "Part Time (PT)"),
+    row("Mobile", "9701798883"),
+    row("Official Mail", "phd21cs@mru.edu.in"),
+    row("Personal Mail", "ekrishnavenireddy@gmail.com"),
+    row("Department", "Computer Science & Engineering"),
+  ],
+}),
           // ===== ACADEMIC DETAILS =====
-          new Paragraph({ text: "ACADEMIC DETAILS", bold: true }),
-          new Paragraph("Date of Joining: 02-01-2021"),
-          new Paragraph("Type: Part Time"),
-          new Paragraph("Employment: College"),
-          new Paragraph("Status: Continuing"),
-          new Paragraph(""),
+          new Paragraph({
+  children: [new TextRun({ text: "ACADEMIC DETAILS", bold: true, size: 26 })],
+  spacing: { before: 300, after: 200 },
+}),
+
+new Table({
+  width: { size: 100, type: WidthType.PERCENTAGE },
+  rows: [
+    row("Date of Joining", "02-01-2021"),
+    row("Type", "Part Time"),
+    row("Employment", "College"),
+    row("Status", "Continuing"),
+  ],
+}),
 
           // ===== SUPERVISOR DETAILS =====
-          new Paragraph({ text: "SUPERVISOR DETAILS", bold: true }),
-          new Paragraph("Supervisor Name: Dr. Thayyaba Khatoon"),
-          new Paragraph("Department: CSE, MRU"),
-          new Paragraph("Official Mail: thayyaba.khatoon@mru.edu.in"),
-          new Paragraph("Personal Mail: thayyabakhatoon@gmail.com"),
-          new Paragraph("Mobile: 98XXXXXXXX"),
-          new Paragraph("Assigned Date: 01-02-2021"),
-          new Paragraph(""),
+          new Paragraph({
+  children: [new TextRun({ text: "SUPERVISOR DETAILS", bold: true, size: 26 })],
+  spacing: { before: 300, after: 200 },
+}),
+
+new Table({
+  width: { size: 100, type: WidthType.PERCENTAGE },
+  rows: [
+    row("Supervisor Name", "Dr. Thayyaba Khatoon"),
+    row("Department", "CSE, MRU"),
+    row("Official Mail", "thayyaba.khatoon@mru.edu.in"),
+    row("Personal Mail", "thayyabakhatoon@gmail.com"),
+    row("Mobile", "98XXXXXXXX"),
+    row("Assigned Date", "01-02-2021"),
+  ],
+}),
 
           // ===== CO-SUPERVISOR DETAILS =====
-          new Paragraph({ text: "CO-SUPERVISOR DETAILS", bold: true }),
-          new Paragraph("Co-Supervisor Name: Dr. XYZ"),
-          new Paragraph("Department: CSE, MRU"),
-          new Paragraph("Official Mail: cosupervisor@mru.edu.in"),
-          new Paragraph("Personal Mail: cosupervisor@gmail.com"),
-          new Paragraph("Mobile: 97XXXXXXXX"),
-          new Paragraph("Assigned Date: 15-03-2021"),
-          new Paragraph(""),
+          new Paragraph({
+  children: [new TextRun({ text: "CO-SUPERVISOR DETAILS", bold: true, size: 26 })],
+  spacing: { before: 300, after: 200 },
+}),
 
+new Table({
+  width: { size: 100, type: WidthType.PERCENTAGE },
+  rows: [
+    row("Co-Supervisor Name", "Dr. XYZ"),
+    row("Department", "CSE, MRU"),
+    row("Official Mail", "cosupervisor@mru.edu.in"),
+    row("Personal Mail", "cosupervisor@gmail.com"),
+    row("Mobile", "97XXXXXXXX"),
+    row("Assigned Date", "15-03-2021"),
+  ],
+}),
           // ===== FEES =====
-          new Paragraph({ text: "FEES DETAILS", bold: true }),
-          new Paragraph("Year 1: Paid"),
-          new Paragraph("Year 2: Paid"),
-          new Paragraph("Year 3: Pending"),
-          new Paragraph("Year 4: Pending"),
-          new Paragraph(""),
+          new Paragraph({
+  children: [new TextRun({ text: "FEES DETAILS", bold: true, size: 26 })],
+  spacing: { before: 300, after: 200 },
+}),
+
+new Table({
+  width: { size: 100, type: WidthType.PERCENTAGE },
+  rows: [
+    row("Year 1", "Paid"),
+    row("Year 2", "Paid"),
+    row("Year 3", "Pending"),
+    row("Year 4", "Pending"),
+  ],
+}),
 
           // ===== COURSE WORK =====
-          new Paragraph({ text: "COURSE WORK", bold: true }),
-          new Paragraph("Student Course Work 1: Completed (15-06-2022)"),
-          new Paragraph("Student Course Work 2: Incomplete"),
-          new Paragraph(""),
+          new Paragraph({
+  children: [new TextRun({ text: "COURSE WORK", bold: true, size: 26 })],
+  spacing: { before: 300, after: 200 },
+}),
 
+new Table({
+  width: { size: 100, type: WidthType.PERCENTAGE },
+  rows: [
+    row("Student Course Work 1", "Completed (15-06-2022)"),
+    row("Student Course Work 2", "Incomplete"),
+  ],
+}),
           // ===== RRM =====
-          new Paragraph({ text: "RRM DETAILS", bold: true }),
-          new Paragraph("RRM 1: Clear (10-08-2022)"),
-          new Paragraph("RRM 2: Clear (12-02-2023)"),
-          new Paragraph("RRM 3: Not Clear"),
-          new Paragraph(""),
+          new Paragraph({
+  children: [new TextRun({ text: "RRM DETAILS", bold: true, size: 26 })],
+  spacing: { before: 300, after: 200 },
+}),
+
+new Table({
+  width: { size: 100, type: WidthType.PERCENTAGE },
+  rows: [
+    row("RRM 1", "Completed (15-06-2022)"),
+    row("RRM 2", "Incomplete"),
+  ],
+}),
 
           // ===== PUBLICATIONS =====
-          new Paragraph({ text: "PUBLICATIONS", bold: true }),
-          new Paragraph("1. Machine Learning Based Analysis – Scopus – 2023"),
-          new Paragraph("2. Deep Learning for Healthcare – SCI – 2024"),
-          new Paragraph(""),
+          new Paragraph({
+  children: [new TextRun({ text: "PUBLICATIONS", bold: true, size: 26 })],
+  spacing: { before: 300, after: 200 },
+}),
+
+new Table({
+  width: { size: 100, type: WidthType.PERCENTAGE },
+  rows: [
+
+    new TableRow({
+      children: [
+        new TableCell({ children: [new Paragraph("S.No")] }),
+        new TableCell({ children: [new Paragraph("Title")] }),
+        new TableCell({ children: [new Paragraph("Journal")] }),
+        new TableCell({ children: [new Paragraph("Year")] }),
+        new TableCell({ children: [new Paragraph("Index")] }),
+      ],
+    }),
+
+    new TableRow({
+      children: [
+        new TableCell({ children: [new Paragraph("1")] }),
+        new TableCell({ children: [new Paragraph("Machine Learning Based Analysis")] }),
+        new TableCell({ children: [new Paragraph("International Journal of AI")] }),
+        new TableCell({ children: [new Paragraph("2023")] }),
+        new TableCell({ children: [new Paragraph("Scopus")] }),
+      ],
+    }),
+
+    new TableRow({
+      children: [
+        new TableCell({ children: [new Paragraph("2")] }),
+        new TableCell({ children: [new Paragraph("Deep Learning for Healthcare")] }),
+        new TableCell({ children: [new Paragraph("IEEE Access")] }),
+        new TableCell({ children: [new Paragraph("2024")] }),
+        new TableCell({ children: [new Paragraph("SCI")] }),
+      ],
+    }),
+  ],
+}),
 
           // ===== THESIS & VIVA =====
-          new Paragraph({ text: "THESIS & VIVA DETAILS", bold: true }),
-          new Paragraph("Colloquium Date: 15-03-2024"),
-          new Paragraph("Colloquium Result: Passed"),
-          new Paragraph("Proposed Thesis Title: A Study on Machine Learning Models for Predictive Analytics"),
-          new Paragraph("Thesis Submission Date: 20-01-2025"),
-          new Paragraph("Viva Date: 05-02-2025"),
-          new Paragraph("Viva Completed: Yes"),
+          new Paragraph({
+  children: [new TextRun({ text: "THESIS & VIVA DETAILS", bold: true, size: 26 })],
+  spacing: { before: 300, after: 200 },
+}),
+
+new Table({
+  width: { size: 100, type: WidthType.PERCENTAGE },
+  rows: [
+    row("Colloquium Date", "15-03-2024"),
+    row("Colloquium Result", "Passed"),
+    row("Proposed Thesis Title", "A Study on Machine Learning Models for Predictive Analytics"),
+    row("Thesis Submission Date", "20-01-2025"),
+    row("Viva Date", "05-02-2025"),
+    row("Viva Completed", "Yes"),
+  ],
+}),
         ],
       },
     ],
@@ -224,7 +310,7 @@ const renderAllSectionsForPrint = () => (
           
 
 {/* ---------------- PERSONAL ---------------- */}
-{activeTab === "personal" && (
+{(activeTab === "personal" || isPrinting) && (
   <div className="info-card">
     <h3 className="section-title">Personal Information</h3>
     <p className="supervisor">
@@ -318,7 +404,7 @@ const renderAllSectionsForPrint = () => (
 )}
 
 {/* ---------------- ACADEMIC ---------------- */}
-{activeTab === "academic" && (
+{(activeTab === "academic" || isPrinting) && (
   <div className="info-card">
     <h3 className="section-title">Academic Information</h3>
 
@@ -334,7 +420,7 @@ const renderAllSectionsForPrint = () => (
 )}
 
 {/* ---------------- RESEARCH ---------------- */}
-{activeTab === "research" && (
+{(activeTab === "research" || isPrinting) && (
   <>
     {/* ================= SUPERVISOR DETAILS ================= */}
     <div className="info-card supervisor-card">
@@ -461,7 +547,7 @@ const renderAllSectionsForPrint = () => (
 )}
 
 {/* ---------------- FEES ---------------- */}
-{activeTab === "fees" && (
+{(activeTab === "fees" || isPrinting) && (
   <div className="info-card">
     <h3 className="section-title">Fees, Course Work & RRM</h3>
     <h4 className="sub-title">Fees</h4>
@@ -581,7 +667,7 @@ const renderAllSectionsForPrint = () => (
 )}
 
 {/* ---------------- PUBLICATIONS ---------------- */}
-{activeTab === "publications" && (
+{(activeTab === "publications" || isPrinting) && (
   <div className="info-card">
   <h3 className="section-title">Publications</h3>
 
@@ -604,7 +690,15 @@ const renderAllSectionsForPrint = () => (
         <td>International Journal of AI</td>
         <td>1234-5678</td>
         <td>2023</td>
-        <td>Scopus</td>
+        <td>
+  <select className="table-dropdown">
+    <option>SCI</option>
+    <option>SCOPUS</option>
+    <option>WOS</option>
+    <option>IEEE</option>
+    <option>NAAS</option>
+  </select>
+</td>
       </tr>
 
       <tr>
@@ -613,7 +707,15 @@ const renderAllSectionsForPrint = () => (
         <td>IEEE Access</td>
         <td>8765-4321</td>
         <td>2024</td>
-        <td>SCI</td>
+        <td>
+  <select className="table-dropdown">
+    <option>SCI</option>
+    <option>SCOPUS</option>
+    <option>WOS</option>
+    <option>IEEE</option>
+    <option>NAAS</option>
+  </select>
+</td>
       </tr>
     </tbody>
   </table>
@@ -677,7 +779,7 @@ const renderAllSectionsForPrint = () => (
         </div>
       </div>
     </>
-  );
+);
 }
 
 export default StudentDashboard;
