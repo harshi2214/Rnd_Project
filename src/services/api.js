@@ -15,8 +15,12 @@ export const fetchAllData = async () => {
 export const addStudent = async (data) => {
   try {
     const response = await fetch(API_URL, {
+      // method: "POST",
+      // body: JSON.stringify(data),
+
       method: "POST",
-      body: JSON.stringify(data),
+headers: { "Content-Type": "text/plain" },
+body: JSON.stringify(data),
     });
     return await response.json();
   } catch (error) {
